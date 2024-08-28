@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href=# />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reverse Guessing Game</title>
+  </head>
+  <body>
+    <header>
+      <h1>Reverse Guessing Game</h1>
+    </header>
+
+    <main>
+        <h2>Think a number between 1 and 100</h2>
+      <section id="start-game-container">
+        <h3>Computer will try to guess it - click start button when ready!</h3>
+        <div class="button-container">
+          <button id="start">Start</button>
+        </div>
+      </section>
+
+
+      <section id="game-container" >
+        <div id="output">
+          <div id="guess-container"></div>
+          <div id="visualization"></div>
+        </div>
+        <div class="button-container" >
+          <button id="tooLow">Too Low</button>
+          <button id="correct">Correct</button>
+          <button id="tooHigh">Too High</button>
+        </div>
+        </section>
+
+
+
+    </main>
+
+    <script type="module" src="/src/app.ts"></script>
+  </body>
+</html>
