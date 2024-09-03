@@ -1,8 +1,13 @@
-import {getpossibleGuesses} from "./game.ts";
+import { maxNumber, getLowestNumber, getHighestNumber} from "./game.ts";
 
 const guessContainer: HTMLDivElement | null = document.querySelector('#guess-container');
 const visualizationContainer: HTMLDivElement | null = document.querySelector('#visualization');
-const maxNumber: number = 100;
+
+const resetGuessContainer = () => {
+    if (guessContainer) {
+        guessContainer.innerHTML = '';
+    }
+}
 
 const outputToGuessContainer = (message: string) => {
     if (guessContainer) {
@@ -29,10 +34,14 @@ const visualizePossibleGuesses = () => {
         visualizationContainer.innerHTML = '';
 
         const allNumbers = Array.from({ length: maxNumber }, (_, i) => i + 1);
-        const possibleGuesses = getpossibleGuesses();
+        const lowestNumber = getLowestNumber();
+        const highestNumber = getHighestNumber();
+
+        const allNumbersInRange = allNumbers.filter(i => i >= lowestNumber && i <= highestNumber);
+        console.log(allNumbersInRange);
 
         const combinedElements = allNumbers.map(i => {
-            const isAvailable = possibleGuesses.includes(i);
+            const isAvailable = allNumbersInRange.includes(i);
             const className = isAvailable ? 'available' : 'not-available';
             return `<div class="numberElement ${className}">${i}</div>`;
         });
@@ -41,4 +50,4 @@ const visualizePossibleGuesses = () => {
     }
 }
 
-export { hideContainer, showContainer, outputToGuessContainer, visualizePossibleGuesses };
+export { hideContainer, showContainer, outputToGuessContainer, visualizePossibleGuesses, resetGuessContainer };

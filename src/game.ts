@@ -1,25 +1,22 @@
+import { resetGuessContainer } from "./utils.ts";
+
 const maxNumber: number = 100;
 let lastGuess: number = 0;
-let possibleGuesses: number[] = [];
-
-const initPossibleGuesses = () => {
-    possibleGuesses = [];
-    for (let i = 1; i <= maxNumber; i++) {
-        possibleGuesses.push(i);
-    }
-}
+let highestNumber: number = maxNumber;
+let lowestNumber: number = 1;
 
 const getRandomGuess = (): number => {
-    const randomIndex = Math.floor(Math.random() * possibleGuesses.length);
-    return possibleGuesses[randomIndex];
+    return Math.ceil((highestNumber - lowestNumber) / 2) + lowestNumber;
 }
 
 const handleTooLow = (guess: number) => {
-    possibleGuesses = possibleGuesses.filter(number => number > guess);
+    lowestNumber = guess + 1;
+    console.log(`new lowestNumber: ${guess}`);
 }
 
 const handleTooHigh = (guess: number) => {
-    possibleGuesses = possibleGuesses.filter(number => number < guess);
+    highestNumber = guess - 1;
+    console.log(`new highestNumber: ${guess}`);
 }
 
 const performGuess = () => {
@@ -29,12 +26,16 @@ const performGuess = () => {
 }
 
 const resetGame = () => {
+    resetGuessContainer();
     lastGuess = 0;
-    initPossibleGuesses();
+    highestNumber = maxNumber;
+    lowestNumber = 0;
 }
 
 const getLastGuess = () => lastGuess;
 
-const getpossibleGuesses = () => possibleGuesses;
+const getHighestNumber = () => highestNumber;
 
-export { maxNumber, initPossibleGuesses, performGuess, handleTooLow, handleTooHigh, resetGame, getLastGuess, getpossibleGuesses };
+const getLowestNumber = () => lowestNumber;
+
+export { maxNumber, performGuess, handleTooLow, handleTooHigh, resetGame, getLastGuess, getHighestNumber, getLowestNumber };
